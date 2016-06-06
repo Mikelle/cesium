@@ -1059,6 +1059,8 @@ define([
         processPacketData(Boolean, box, 'outline', boxData.outline, interval, sourceUri, entityCollection);
         processPacketData(Color, box, 'outlineColor', boxData.outlineColor, interval, sourceUri, entityCollection);
         processPacketData(Number, box, 'outlineWidth', boxData.outlineWidth, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, box, 'castShadows', boxData.castShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, box, 'receiveShadows', boxData.receiveShadows, interval, sourceUri, entityCollection);
     }
 
     function processCylinder(entity, packet, entityCollection, sourceUri) {
@@ -1088,6 +1090,8 @@ define([
         processPacketData(Boolean, cylinder, 'outline', cylinderData.outline, interval, sourceUri, entityCollection);
         processPacketData(Color, cylinder, 'outlineColor', cylinderData.outlineColor, interval, sourceUri, entityCollection);
         processPacketData(Number, cylinder, 'outlineWidth', cylinderData.outlineWidth, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, cylinder, 'castShadows', cylinderData.castShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, cylinder, 'receiveShadows', cylinderData.receiveShadows, interval, sourceUri, entityCollection);
     }
 
     function processDocument(packet, dataSource) {
@@ -1471,6 +1475,8 @@ define([
         processPacketData(Boolean, corridor, 'outline', corridorData.outline, interval, sourceUri, entityCollection);
         processPacketData(Color, corridor, 'outlineColor', corridorData.outlineColor, interval, sourceUri, entityCollection);
         processPacketData(Number, corridor, 'outlineWidth', corridorData.outlineWidth, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, corridor, 'castShadows', corridorData.castShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, corridor, 'receiveShadows', corridorData.receiveShadows, interval, sourceUri, entityCollection);
     }
 
     function processWall(entity, packet, entityCollection, sourceUri) {
