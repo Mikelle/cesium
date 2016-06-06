@@ -11,6 +11,7 @@ define([
         '../Core/DeveloperError',
         '../Core/Ellipsoid',
         '../Core/EllipsoidTerrainProvider',
+        '../Core/Event',
         '../Core/GeographicProjection',
         '../Core/IntersectionTests',
         '../Core/loadImage',
@@ -39,6 +40,7 @@ define([
         DeveloperError,
         Ellipsoid,
         EllipsoidTerrainProvider,
+        Event,
         GeographicProjection,
         IntersectionTests,
         loadImage,
@@ -95,11 +97,8 @@ define([
             })
         });
 
-        /**
-         * The terrain provider providing surface geometry for this globe.
-         * @type {TerrainProvider}
-         */
-        this.terrainProvider = terrainProvider;
+        this._terrainProvider = terrainProvider;
+        this._terrainProviderChanged = new Event();
 
         /**
          * Determines if the globe will be shown.
@@ -192,7 +191,7 @@ define([
          * Determines whether the globe will cast shadows from each light source. Any primitive that has
          * <code>receiveShadows</code> set to <code>true</code> will receive shadows that are casted by
          * the globe. This may impact performance since the terrain is rendered again from the light's
-         * perspective, which will also load terrain tiles that are potentially out of view.
+         * perspective. Currently only terrain that is in view casts shadows.
          *
          * @type {Boolean}
          * @default false
@@ -243,6 +242,37 @@ define([
             },
             set : function(value) {
                 this._surface.tileProvider.baseColor = value;
+            }
+        },
+        /**
+         * The terrain provider providing surface geometry for this globe.
+         * @type {TerrainProvider}
+         *
+         * @memberof Globe.prototype
+         * @type {TerrainProvider}
+         *
+         */
+        terrainProvider : {
+            get : function() {
+                return this._terrainProvider;
+            },
+            set : function(value) {
+                if (value !== this._terrainProvider) {
+                    this._terrainProvider = value;
+                    this._terrainProviderChanged.raiseEvent(value);
+                }
+            }
+        },
+        /**
+         * Gets an event that's raised when the terrain provider is changed
+         *
+         * @memberof Globe.prototype
+         * @type {Event}
+         * @readonly
+         */
+        terrainProviderChanged : {
+            get: function() {
+                return this._terrainProviderChanged;
             }
         },
         /**

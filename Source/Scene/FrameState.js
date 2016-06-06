@@ -171,27 +171,34 @@ define([
 
         this.shadowHints = {
             /**
-            * The near plane of the scene's frustum commands. Used for fitting cascaded shadow maps.
-            * @type {Number}
-            */
-            nearPlane : undefined,
-
-            /**
-            * The far plane of the scene's frustum commands. Used for fitting cascaded shadow maps.
-            * @type {Number}
-            */
-            farPlane : undefined,
-
-            /**
-             * The size of the bounding volume that is closest to the camera. Used to estimate cascade splits.
+             * The near plane of the scene's frustum commands. Used for fitting cascaded shadow maps.
              * @type {Number}
              */
-            closestObjectSize : undefined,
+            nearPlane : 1.0,
+
+            /**
+             * The far plane of the scene's frustum commands. Used for fitting cascaded shadow maps.
+             * @type {Number}
+             */
+            farPlane : 5000.0,
+
+            /**
+             * The size of the bounding volume that is closest to the camera. This is used to place more shadow detail near the object.
+             * @type {Number}
+             */
+            closestObjectSize : 1000.0,
 
             /**
              * The time when a shadow map was last dirty
+             * @type {Number}
              */
-            lastDirtyTime : 0
+            lastDirtyTime : 0,
+
+            /**
+             * Whether the shadows maps are out of view this frame
+             * @type {Boolean}
+             */
+            outOfView : true
         };
     }
 

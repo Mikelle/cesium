@@ -231,7 +231,7 @@ var viewModel = {
             polygonOffsetFactor : 1.1,
             polygonOffsetUnits : 4.0,
             normalOffset : true,
-            normalOffsetScale : 2.0,
+            normalOffsetScale : 0.5,
             normalShading : true,
             normalShadingSmooth : 0.3,
             depthBias : 0.0001
@@ -242,7 +242,7 @@ var viewModel = {
             polygonOffsetFactor : 1.1,
             polygonOffsetUnits : 4.0,
             normalOffset : true,
-            normalOffsetScale : 0.2,
+            normalOffsetScale : 0.1,
             normalShading : true,
             normalShadingSmooth : 0.05,
             depthBias : 0.00001
@@ -374,7 +374,7 @@ function updateSettings() {
     for (var i = 0; i < viewModel.biasModes.length; ++i) {
         var biasMode = viewModel.biasModes[i];
         var bias = shadowMap['_' + biasMode.type + 'Bias'];
-        bias.polygonOffset = biasMode.polygonOffset();
+        bias.polygonOffset = !shadowMap._isPointLight && shadowMap._polygonOffsetSupported && biasMode.polygonOffset();
         bias.polygonOffsetFactor = biasMode.polygonOffsetFactor();
         bias.polygonOffsetUnits = biasMode.polygonOffsetUnits();
         bias.normalOffset = biasMode.normalOffset();
