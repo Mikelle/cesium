@@ -41,8 +41,7 @@ define([
      * @param {Property} [options.rotation=0.0] A numeric property specifying the rotation of the ellipse counter-clockwise from north.
      * @param {Property} [options.stRotation=0.0] A numeric property specifying the rotation of the ellipse texture counter-clockwise from north.
      * @param {Property} [options.granularity=Cesium.Math.RADIANS_PER_DEGREE] A numeric Property specifying the angular distance between points on the ellipse.
-     * @param {Property} [options.castShadows=false] A boolean Property specifying whether the ellipse casts shadows from each light source.
-     * @param {Property} [options.receiveShadows=false] A boolean Property specifying whether the ellipse receives shadows from shadow casters in the scene.
+     * @param {Property} [options.shadows=false] A boolean Property specifying whether the ellipse casts and receives shadows from each light source.
      *
      * @demo {@link http://cesiumjs.org/Cesium/Apps/Sandcastle/index.html?src=Circles and Ellipses.html|Cesium Sandcastle Circles and Ellipses Demo}
      */
@@ -75,10 +74,8 @@ define([
         this._outlineWidthSubscription = undefined;
         this._numberOfVerticalLines = undefined;
         this._numberOfVerticalLinesSubscription = undefined;
-        this._castShadows = undefined;
-        this._castShadowsSubscription = undefined;
-        this._receiveShadows = undefined;
-        this._receiveShadowsSubscription = undefined;
+        this._shadows = undefined;
+        this._shadowsSubscription = undefined;
         this._definitionChanged = new Event();
 
         this.merge(defaultValue(options, defaultValue.EMPTY_OBJECT));
@@ -210,21 +207,12 @@ define([
         
         /**
          * Get or sets the boolean Property specifying whether the ellipse
-         * casts shadows from each light source.
+         * casts and receives shadows from each light source.
          * @memberof EllipseGraphics.prototype
          * @type {Property}
          * @default false
          */
-        castShadows : createPropertyDescriptor('castShadows'),
-
-        /**
-         * Get or sets the boolean Property specifying whether the ellipse
-         * receives shadows from shadow casters in the scene.
-         * @memberof EllipseGraphics.prototype
-         * @type {Property}
-         * @default false
-         */
-        receiveShadows : createPropertyDescriptor('receiveShadows')
+        shadows : createPropertyDescriptor('shadows')
     });
 
     /**
@@ -251,8 +239,7 @@ define([
         result.outlineColor = this.outlineColor;
         result.outlineWidth = this.outlineWidth;
         result.numberOfVerticalLines = this.numberOfVerticalLines;
-        result.castShadows = this.castShadows;
-        result.receiveShadows = this.receiveShadows;
+        result.shadows = this.shadows;
         return result;
     };
 
@@ -283,8 +270,7 @@ define([
         this.outlineColor = defaultValue(this.outlineColor, source.outlineColor);
         this.outlineWidth = defaultValue(this.outlineWidth, source.outlineWidth);
         this.numberOfVerticalLines = defaultValue(this.numberOfVerticalLines, source.numberOfVerticalLines);
-        this.castShadows = defaultValue(this.castShadows, source.castShadows);
-        this.receiveShadows = defaultValue(this.receiveShadows, source.receiveShadows);
+        this.shadows = defaultValue(this.shadows, source.shadows);
     };
 
     return EllipseGraphics;

@@ -19,11 +19,10 @@ define([
         BoundingSphereState) {
     'use strict';
 
-    function Batch(primitives, translucent, width, castShadows, receiveShadows) {
+    function Batch(primitives, translucent, width, shadows) {
         this.translucent = translucent;
         this.width = width;
-        this.castShadows = castShadows;
-        this.receiveShadows = receiveShadows;
+        this.shadows = shadows;
         this.primitives = primitives;
         this.createPrimitive = false;
         this.waitingOnCreate = false;
@@ -113,8 +112,8 @@ define([
                             lineWidth : this.width
                         }
                     }),
-                    castShadows : this.castShadows,
-                    receiveShadows : this.receiveShadows
+                    castShadows : this.shadows,
+                    receiveShadows : this.shadows
                 });
 
                 primitives.add(primitive);
@@ -244,11 +243,10 @@ define([
     /**
      * @private
      */
-    function StaticOutlineGeometryBatch(primitives, scene, castShadows, receiveShadows) {
+    function StaticOutlineGeometryBatch(primitives, scene, shadows) {
         this._primitives = primitives;
         this._scene = scene;
-        this._castShadows = castShadows;
-        this._receiveShadows = receiveShadows;
+        this._shadows = shadows;
         this._solidBatches = new AssociativeArray();
         this._translucentBatches = new AssociativeArray();
     }
@@ -261,7 +259,7 @@ define([
             batches = this._solidBatches;
             batch = batches.get(width);
             if (!defined(batch)) {
-                batch = new Batch(this._primitives, false, width, this._castShadows, this._receiveShadows);
+                batch = new Batch(this._primitives, false, width, this._shadows);
                 batches.set(width, batch);
             }
             batch.add(updater, instance);
@@ -269,7 +267,7 @@ define([
             batches = this._translucentBatches;
             batch = batches.get(width);
             if (!defined(batch)) {
-                batch = new Batch(this._primitives, true, width, this._castShadows, this._receiveShadows);
+                batch = new Batch(this._primitives, true, width, this._shadows);
                 batches.set(width, batch);
             }
             batch.add(updater, instance);

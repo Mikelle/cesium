@@ -50,8 +50,7 @@ define([
     var defaultFill = new ConstantProperty(true);
     var defaultOutline = new ConstantProperty(false);
     var defaultOutlineColor = new ConstantProperty(Color.BLACK);
-    var defaultCastShadows = new ConstantProperty(false);
-    var defaultReceiveShadows = new ConstantProperty(false);
+    var defaultShadows = new ConstantProperty(false);
     var scratchColor = new Color();
 
     function GeometryOptions(entity) {
@@ -95,8 +94,7 @@ define([
         this._showOutlineProperty = undefined;
         this._outlineColorProperty = undefined;
         this._outlineWidth = 1.0;
-        this._castShadowsProperty = undefined;
-        this._receiveShadowsProperty = undefined;
+        this._shadowsProperty = undefined;
         this._options = new GeometryOptions(entity);
         this._onEntityPropertyChanged(entity, 'wall', entity.wall, undefined);
     }
@@ -226,28 +224,15 @@ define([
         },
         /**
          * Gets the boolean property specifying whether the geometry
-         * casts shadows from each light source.
+         * casts and receives shadows from each light source.
          * @memberof WallGeometryUpdater.prototype
          *
          * @type {Property}
          * @readonly
          */
-        castShadowsProperty : {
+        shadowsProperty : {
             get : function() {
-                return this._castShadowsProperty;
-            }
-        },
-        /**
-         * Gets the boolean Property specifying whether the geometry
-         * receives shadows from shadow casters in the scene.
-         * @memberof WallGeometryUpdater.prototype
-         *
-         * @type {Property}
-         * @readonly
-         */
-        receiveShadowsProperty : {
-            get : function() {
-                return this._receiveShadowsProperty;
+                return this._shadowsProperty;
             }
         },
         /**
@@ -469,8 +454,7 @@ define([
         this._showProperty = defaultValue(show, defaultShow);
         this._showOutlineProperty = defaultValue(wall.outline, defaultOutline);
         this._outlineColorProperty = outlineEnabled ? defaultValue(wall.outlineColor, defaultOutlineColor) : undefined;
-        this._castShadowsProperty = defaultValue(wall.castShadows, defaultCastShadows);
-        this._receiveShadowsProperty = defaultValue(wall.receiveShadows, defaultReceiveShadows);
+        this._shadowsProperty = defaultValue(wall.shadows, defaultShadows);
 
         var minimumHeights = wall.minimumHeights;
         var maximumHeights = wall.maximumHeights;
@@ -565,8 +549,7 @@ define([
         options.maximumHeights = Property.getValueOrUndefined(wall.maximumHeights, time, options.maximumHeights);
         options.granularity = Property.getValueOrUndefined(wall.granularity, time);
 
-        var castShadows = this._geometryUpdater.castShadowsProperty.getValue(time);
-        var receiveShadows = this._geometryUpdater.receiveShadowsProperty.getValue(time);
+        var shadows = this._geometryUpdater.shadowsProperty.getValue(time);
 
         if (Property.getValueOrDefault(wall.fill, time, true)) {
             var material = MaterialProperty.getValue(time, geometryUpdater.fillMaterialProperty, this._material);
@@ -586,8 +569,8 @@ define([
                 }),
                 appearance : appearance,
                 asynchronous : false,
-                castShadows : castShadows,
-                receiveShadows : receiveShadows
+                castShadows : shadows,
+                receiveShadows : shadows
             }));
         }
 
@@ -614,8 +597,8 @@ define([
                     }
                 }),
                 asynchronous : false,
-                castShadows : castShadows,
-                receiveShadows : receiveShadows
+                castShadows : shadows,
+                receiveShadows : shadows
             }));
         }
     };

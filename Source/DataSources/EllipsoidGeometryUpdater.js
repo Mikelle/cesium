@@ -56,8 +56,7 @@ define([
     var defaultFill = new ConstantProperty(true);
     var defaultOutline = new ConstantProperty(false);
     var defaultOutlineColor = new ConstantProperty(Color.BLACK);
-    var defaultCastShadows = new ConstantProperty(false);
-    var defaultReceiveShadows = new ConstantProperty(false);
+    var defaultShadows = new ConstantProperty(false);
 
     var radiiScratch = new Cartesian3();
     var scratchColor = new Color();
@@ -104,8 +103,7 @@ define([
         this._showOutlineProperty = undefined;
         this._outlineColorProperty = undefined;
         this._outlineWidth = 1.0;
-        this._castShadowsProperty = undefined;
-        this._receiveShadowsProperty = undefined;
+        this._shadowsProperty = undefined;
         this._options = new GeometryOptions(entity);
         this._onEntityPropertyChanged(entity, 'ellipsoid', entity.ellipsoid, undefined);
     }
@@ -235,28 +233,15 @@ define([
         },
         /**
          * Gets the boolean property specifying whether the geometry
-         * casts shadows from each light source.
+         * casts and receives shadows from each light source.
          * @memberof EllipsoidGeometryUpdater.prototype
          * 
          * @type {Property}
          * @readonly
          */
-        castShadowsProperty : {
+        shadowsProperty : {
             get : function() {
-                return this._castShadowsProperty;
-            }
-        },
-        /**
-         * Gets the boolean Property specifying whether the geometry
-         * receives shadows from shadow casters in the scene.
-         * @memberof EllipsoidGeometryUpdater.prototype
-         * 
-         * @type {Property}
-         * @readonly
-         */
-        receiveShadowsProperty : {
-            get : function() {
-                return this._receiveShadowsProperty;
+                return this._shadowsProperty;
             }
         },
         /**
@@ -480,8 +465,7 @@ define([
         this._showProperty = defaultValue(show, defaultShow);
         this._showOutlineProperty = defaultValue(ellipsoid.outline, defaultOutline);
         this._outlineColorProperty = outlineEnabled ? defaultValue(ellipsoid.outlineColor, defaultOutlineColor) : undefined;
-        this._castShadowsProperty = defaultValue(ellipsoid.castShadows, defaultCastShadows);
-        this._receiveShadowsProperty = defaultValue(ellipsoid.receiveShadows, defaultReceiveShadows);
+        this._shadowsProperty = defaultValue(ellipsoid.shadows, defaultShadows);
         
         this._fillEnabled = fillEnabled;
         this._outlineEnabled = outlineEnabled;
@@ -611,8 +595,7 @@ define([
 
         var options = this._options;
         
-        var castShadows = this._geometryUpdater.castShadows;
-        var receiveShadows = this._geometryUpdater.receiveShadows;
+        var shadows = this._geometryUpdater.shadowsProperty.getValue(time);
         
         //We only rebuild the primitive if something other than the radii has changed
         //For the radii, we use unit sphere and then deform it with a scale matrix.
@@ -652,8 +635,8 @@ define([
                 }),
                 appearance : appearance,
                 asynchronous : false,
-                castShadows : castShadows,
-                receiveShadows : receiveShadows
+                castShadows : shadows,
+                receiveShadows : shadows
             }));
 
             options.vertexFormat = PerInstanceColorAppearance.VERTEX_FORMAT;
@@ -676,8 +659,8 @@ define([
                     }
                 }),
                 asynchronous : false,
-                castShadows : castShadows,
-                receiveShadows : receiveShadows
+                castShadows : shadows,
+                receiveShadows : shadows
             }));
 
             this._lastShow = showFill;

@@ -36,8 +36,7 @@ define([
      * @param {Property} [options.outlineWidth=1.0] A numeric Property specifying the width of the outline.
      * @param {Property} [options.numberOfVerticalLines=16] A numeric Property specifying the number of vertical lines to draw along the perimeter for the outline.
      * @param {Property} [options.slices=128] The number of edges around perimeter of the cylinder.
-     * @param {Property} [options.castShadows=false] A boolean Property specifying whether the cylinder casts shadows from each light source.
-     * @param {Property} [options.receiveShadows=false] A boolean Property specifying whether the cylinder receives shadows from shadow casters in the scene.
+     * @param {Property} [options.shadows=false] A boolean Property specifying whether the cylinder casts and receives shadows from each light source.
      *
      */
     function CylinderGraphics(options) {
@@ -63,10 +62,8 @@ define([
         this._outlineColorSubscription = undefined;
         this._outlineWidth = undefined;
         this._outlineWidthSubscription = undefined;
-        this._castShadows = undefined;
-        this._castShadowsSubscription = undefined;
-        this._receiveShadows = undefined;
-        this._receiveShadowsSubscription = undefined;
+        this._shadows = undefined;
+        this._shadowsSubscription = undefined;
         this._definitionChanged = new Event();
 
         this.merge(defaultValue(options, defaultValue.EMPTY_OBJECT));
@@ -175,21 +172,12 @@ define([
 
         /**
          * Get or sets the boolean Property specifying whether the cylinder
-         * casts shadows from each light source.
+         * casts and receives shadows from each light source.
          * @memberof CylinderGraphics.prototype
          * @type {Property}
          * @default false
          */
-        castShadows : createPropertyDescriptor('castShadows'),
-
-        /**
-         * Get or sets the boolean Property specifying whether the cylinder
-         * receives shadows from shadow casters in the scene.
-         * @memberof CylinderGraphics.prototype
-         * @type {Property}
-         * @default false
-         */
-        receiveShadows : createPropertyDescriptor('receiveShadows')
+        shadows : createPropertyDescriptor('shadows')
     });
 
     /**
@@ -213,8 +201,7 @@ define([
         result.outline = this.outline;
         result.outlineColor = this.outlineColor;
         result.outlineWidth = this.outlineWidth;
-        result.castShadows = this.castShadows;
-        result.receiveShadows = this.receiveShadows;
+        result.shadows = this.shadows;
         return result;
     };
 
@@ -242,8 +229,7 @@ define([
         this.outline = defaultValue(this.outline, source.outline);
         this.outlineColor = defaultValue(this.outlineColor, source.outlineColor);
         this.outlineWidth = defaultValue(this.outlineWidth, source.outlineWidth);
-        this.castShadows = defaultValue(this.castShadows, source.castShadows);
-        this.receiveShadows = defaultValue(this.receiveShadows, source.receiveShadows);
+        this.shadows = defaultValue(this.shadows, source.shadows);
     };
 
     return CylinderGraphics;

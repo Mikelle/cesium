@@ -773,8 +773,7 @@ defineSuite([
                     rgbaf : [0.2, 0.2, 0.2, 0.2]
                 },
                 outlineWidth : 6,
-                castShadows : true,
-                receiveShadows : true
+                shadows : true,
             }
         };
 
@@ -789,8 +788,7 @@ defineSuite([
         expect(entity.ellipse.outline.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
         expect(entity.ellipse.outlineColor.getValue(Iso8601.MINIMUM_VALUE)).toEqual(new Color(0.2, 0.2, 0.2, 0.2));
         expect(entity.ellipse.outlineWidth.getValue(Iso8601.MINIMUM_VALUE)).toEqual(6);
-        expect(entity.ellipse.castShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
-        expect(entity.ellipse.receiveShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
+        expect(entity.ellipse.shadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
     });
 
     it('CZML adds data for constrained ellipse.', function() {
@@ -800,8 +798,7 @@ defineSuite([
                 semiMajorAxis : 10,
                 semiMinorAxis : 20,
                 rotation : 1.0,
-                castShadows : true,
-                receiveShadows : true
+                shadows : true
             }
         };
 
@@ -818,14 +815,12 @@ defineSuite([
         expect(entity.ellipse.semiMajorAxis.getValue(validTime)).toEqual(ellipsePacketInterval.ellipse.semiMajorAxis);
         expect(entity.ellipse.semiMinorAxis.getValue(validTime)).toEqual(ellipsePacketInterval.ellipse.semiMinorAxis);
         expect(entity.ellipse.rotation.getValue(validTime)).toEqual(ellipsePacketInterval.ellipse.rotation);
-        expect(entity.ellipse.castShadows.getValue(validTime)).toEqual(true);
-        expect(entity.ellipse.receiveShadows.getValue(validTime)).toEqual(true);
+        expect(entity.ellipse.shadows.getValue(validTime)).toEqual(true);
 
         expect(entity.ellipse.semiMajorAxis.getValue(invalidTime)).toBeUndefined();
         expect(entity.ellipse.semiMinorAxis.getValue(invalidTime)).toBeUndefined();
         expect(entity.ellipse.rotation.getValue(invalidTime)).toBeUndefined();
-        expect(entity.ellipse.castShadows.getValue(invalidTime)).toBeUndefined();
-        expect(entity.ellipse.receiveShadows.getValue(invalidTime)).toBeUndefined();
+        expect(entity.ellipse.shadows.getValue(invalidTime)).toBeUndefined();
     });
 
     it('CZML adds data for infinite ellipsoid.', function() {
@@ -849,8 +844,7 @@ defineSuite([
                     rgbaf : [0.2, 0.2, 0.2, 0.2]
                 },
                 outlineWidth : 6,
-                castShadows : true,
-                receiveShadows : true
+                shadows : true
             }
         };
 
@@ -865,8 +859,7 @@ defineSuite([
         expect(entity.ellipsoid.outline.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
         expect(entity.ellipsoid.outlineColor.getValue(Iso8601.MINIMUM_VALUE)).toEqual(new Color(0.2, 0.2, 0.2, 0.2));
         expect(entity.ellipsoid.outlineWidth.getValue(Iso8601.MINIMUM_VALUE)).toEqual(6);
-        expect(entity.ellipsoid.castShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
-        expect(entity.ellipsoid.receiveShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
+        expect(entity.ellipsoid.shadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
     });
 
     it('CZML adds data for constrained ellipsoid.', function() {
@@ -886,8 +879,7 @@ defineSuite([
                         }
                     }
                 },
-                castShadows : true,
-                receiveShadows : true
+                shadows : true
             }
         };
 
@@ -904,14 +896,12 @@ defineSuite([
         expect(entity.ellipsoid.radii.getValue(validTime)).toEqual(expectedRadii);
         expect(entity.ellipsoid.show.getValue(validTime)).toEqual(ellipsoidPacketInterval.ellipsoid.show);
         expect(entity.ellipsoid.material.getValue(validTime).color).toEqual(new Color(0.1, 0.1, 0.1, 0.1));
-        expect(entity.ellipsoid.castShadows.getValue(validTime)).toEqual(true);
-        expect(entity.ellipsoid.receiveShadows.getValue(validTime)).toEqual(true);
+        expect(entity.ellipsoid.shadows.getValue(validTime)).toEqual(true);
 
         expect(entity.ellipsoid.radii.getValue(invalidTime)).toBeUndefined();
         expect(entity.ellipsoid.show.getValue(invalidTime)).toBeUndefined();
         expect(entity.ellipsoid.material.getValue(invalidTime)).toBeUndefined();
-        expect(entity.ellipsoid.castShadows.getValue(invalidTime)).toBeUndefined();
-        expect(entity.ellipsoid.receiveShadows.getValue(invalidTime)).toBeUndefined();
+        expect(entity.ellipsoid.shadows.getValue(invalidTime)).toBeUndefined();
     });
 
     it('CZML adds data for infinite label.', function() {
@@ -1428,8 +1418,7 @@ defineSuite([
                 outlineWidth : 6,
                 closeTop : false,
                 closeBottom : false,
-                castShadows : true,
-                receiveShadows : true
+                shadows : true
             }
         };
 
@@ -1449,8 +1438,7 @@ defineSuite([
         expect(entity.polygon.outlineWidth.getValue(Iso8601.MINIMUM_VALUE)).toEqual(6);
         expect(entity.polygon.closeTop.getValue(Iso8601.MINIMUM_VALUE)).toEqual(false);
         expect(entity.polygon.closeBottom.getValue(Iso8601.MINIMUM_VALUE)).toEqual(false);
-        expect(entity.polygon.castShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
-        expect(entity.polygon.receiveShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
+        expect(entity.polygon.shadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
     });
 
     it('CZML adds data for constrained polygon.', function() {
@@ -1465,8 +1453,7 @@ defineSuite([
                     }
                 },
                 show : true,
-                castShadows : true,
-                receiveShadows : true
+                shadows : true
             }
         };
 
@@ -1482,13 +1469,11 @@ defineSuite([
         expect(entity.polygon).toBeDefined();
         expect(entity.polygon.material.getValue(validTime).color).toEqual(new Color(0.1, 0.1, 0.1, 0.1));
         expect(entity.polygon.show.getValue(validTime)).toEqual(true);
-        expect(entity.polygon.castShadows.getValue(validTime)).toEqual(true);
-        expect(entity.polygon.receiveShadows.getValue(validTime)).toEqual(true);
+        expect(entity.polygon.shadows.getValue(validTime)).toEqual(true);
 
         expect(entity.polygon.material.getValue(invalidTime)).toBeUndefined();
         expect(entity.polygon.show.getValue(invalidTime)).toBeUndefined();
-        expect(entity.polygon.castShadows.getValue(invalidTime)).toBeUndefined();
-        expect(entity.polygon.receiveShadows.getValue(invalidTime)).toBeUndefined();
+        expect(entity.polygon.shadows.getValue(invalidTime)).toBeUndefined();
 
     });
 
@@ -1508,8 +1493,7 @@ defineSuite([
                 },
                 width : 1.0,
                 show : true,
-                castShadows : true,
-                receiveShadows : true
+                shadows : true
             }
         };
 
@@ -1523,8 +1507,7 @@ defineSuite([
         expect(entity.polyline.material.outlineColor.getValue(Iso8601.MINIMUM_VALUE)).toEqual(new Color(0.2, 0.2, 0.2, 0.2));
         expect(entity.polyline.material.outlineWidth.getValue(Iso8601.MINIMUM_VALUE)).toEqual(1.0);
         expect(entity.polyline.show.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
-        expect(entity.polyline.castShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
-        expect(entity.polyline.receiveShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
+        expect(entity.polyline.shadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
     });
 
     it('CZML adds data for constrained polyline.', function() {
@@ -1544,8 +1527,7 @@ defineSuite([
                 },
                 width : 1.0,
                 show : true,
-                castShadows : true,
-                receiveShadows : true
+                shadows : true
             }
         };
 
@@ -1564,14 +1546,12 @@ defineSuite([
         expect(entity.polyline.material.getValue(validTime).outlineColor).toEqual(new Color(0.2, 0.2, 0.2, 0.2));
         expect(entity.polyline.material.getValue(validTime).outlineWidth).toEqual(1.0);
         expect(entity.polyline.show.getValue(validTime)).toEqual(true);
-        expect(entity.polyline.castShadows.getValue(validTime)).toEqual(true);
-        expect(entity.polyline.receiveShadows.getValue(validTime)).toEqual(true);
+        expect(entity.polyline.shadows.getValue(validTime)).toEqual(true);
 
         expect(entity.polyline.material.getValue(invalidTime)).toBeUndefined();
         expect(entity.polyline.width.getValue(invalidTime)).toBeUndefined();
         expect(entity.polyline.show.getValue(invalidTime)).toBeUndefined();
-        expect(entity.polyline.castShadows.getValue(invalidTime)).toBeUndefined();
-        expect(entity.polyline.receiveShadows.getValue(invalidTime)).toBeUndefined();
+        expect(entity.polyline.shadows.getValue(invalidTime)).toBeUndefined();
 
     });
 
@@ -1583,8 +1563,7 @@ defineSuite([
                 minimumPixelSize : 5.0,
                 gltf : './Data/Models/Box/CesiumBoxTest.gltf',
                 incrementallyLoadTextures : true,
-                castShadows : true,
-                receiveShadows : true,
+                shadows : true,
                 nodeTransformations : {
                     Mesh : {
                         scale : {
@@ -1611,8 +1590,7 @@ defineSuite([
         expect(entity.model.minimumPixelSize.getValue(Iso8601.MINIMUM_VALUE)).toEqual(5.0);
         expect(entity.model.uri.getValue(Iso8601.MINIMUM_VALUE)).toEqual('./Data/Models/Box/CesiumBoxTest.gltf');
         expect(entity.model.incrementallyLoadTextures.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
-        expect(entity.model.castShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
-        expect(entity.model.receiveShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
+        expect(entity.model.shadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
 
         var nodeTransform = entity.model.nodeTransformations.getValue(Iso8601.MINIMUM_VALUE).Mesh;
         expect(nodeTransform).toBeDefined();
@@ -1637,8 +1615,7 @@ defineSuite([
                 minimumPixelSize : 5.0,
                 gltf : './Data/Models/Box/CesiumBoxTest.gltf',
                 incrementallyLoadTextures : true,
-                castShadows : true,
-                receiveShadows : true,
+                shadows : true,
                 nodeTransformations : {
                     Mesh : {
                         scale : {
@@ -1670,8 +1647,7 @@ defineSuite([
         expect(entity.model.minimumPixelSize.getValue(validTime)).toEqual(5.0);
         expect(entity.model.uri.getValue(validTime)).toEqual('./Data/Models/Box/CesiumBoxTest.gltf');
         expect(entity.model.incrementallyLoadTextures.getValue(validTime)).toEqual(true);
-        expect(entity.model.castShadows.getValue(validTime)).toEqual(true);
-        expect(entity.model.receiveShadows.getValue(validTime)).toEqual(true);
+        expect(entity.model.shadows.getValue(validTime)).toEqual(true);
 
         var nodeTransform = entity.model.nodeTransformations.getValue(validTime).Mesh;
         expect(nodeTransform).toBeDefined();
@@ -1691,8 +1667,7 @@ defineSuite([
         expect(entity.model.minimumPixelSize.getValue(invalidTime)).toBeUndefined();
         expect(entity.model.uri.getValue(invalidTime)).toBeUndefined();
         expect(entity.model.incrementallyLoadTextures.getValue(invalidTime)).toBeUndefined();
-        expect(entity.model.castShadows.getValue(invalidTime)).toBeUndefined();
-        expect(entity.model.receiveShadows.getValue(invalidTime)).toBeUndefined();
+        expect(entity.model.shadows.getValue(invalidTime)).toBeUndefined();
 
         expect(entity.model.nodeTransformations.Mesh.getValue(invalidTime)).toEqual(new TranslationRotationScale());
         expect(entity.model.nodeTransformations.Mesh.scale.getValue(invalidTime)).toBeUndefined();
@@ -1913,8 +1888,7 @@ defineSuite([
                     rgbaf : [0.2, 0.2, 0.2, 0.2]
                 },
                 outlineWidth : 6,
-                castShadows : true,
-                receiveShadows : true
+                shadows : true
             }
         };
 
@@ -1938,8 +1912,7 @@ defineSuite([
         expect(entity.rectangle.outline.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
         expect(entity.rectangle.outlineColor.getValue(Iso8601.MINIMUM_VALUE)).toEqual(new Color(0.2, 0.2, 0.2, 0.2));
         expect(entity.rectangle.outlineWidth.getValue(Iso8601.MINIMUM_VALUE)).toEqual(6);
-        expect(entity.rectangle.castShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
-        expect(entity.rectangle.receiveShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
+        expect(entity.rectangle.shadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
     });
 
     it('CZML adds data for rectangle in degrees.', function() {
@@ -1980,8 +1953,7 @@ defineSuite([
                     rgbaf : [0.2, 0.2, 0.2, 0.2]
                 },
                 outlineWidth : 6,
-                castShadows : true,
-                receiveShadows : true
+                shadows : true
             }
         };
 
@@ -2000,8 +1972,7 @@ defineSuite([
         expect(entity.wall.outline.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
         expect(entity.wall.outlineColor.getValue(Iso8601.MINIMUM_VALUE)).toEqual(new Color(0.2, 0.2, 0.2, 0.2));
         expect(entity.wall.outlineWidth.getValue(Iso8601.MINIMUM_VALUE)).toEqual(6);
-        expect(entity.wall.castShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
-        expect(entity.wall.receiveShadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
+        expect(entity.wall.shadows.getValue(Iso8601.MINIMUM_VALUE)).toEqual(true);
     });
 
     it('CZML adds data for box.', function() {

@@ -6,7 +6,7 @@ Change Log
 * Add a `rotatable2D` option to to `Scene`, `CesiumWidget` and `Viewer` to enable a rotatable map in 2D. [#3897](https://github.com/AnalyticalGraphicsInc/cesium/issues/3897)
 * `Camera.setView` and `Camera.flyTo` will now use the `orientation.heading` parameter in 2D if the map is rotatable.
 * Added CZML support for Box, Corridor and Cylinder
-* Added `castShadows` and `receiveShadows` properties to the entity API for models, boxes, corridors, cylinders, ellipses, ellipsoids, polygons, polylines, polyline volumes, rectangles, and walls. [#4005](https://github.com/AnalyticalGraphicsInc/cesium/pull/4005)
+* Added `shadows` property to the entity API for models, boxes, corridors, cylinders, ellipses, ellipsoids, polygons, polylines, polyline volumes, rectangles, and walls. [#4005](https://github.com/AnalyticalGraphicsInc/cesium/pull/4005)
 
 ### 1.22 - 2016-06-01
 

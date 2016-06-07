@@ -280,7 +280,7 @@ defineSuite([
         });
     });
 
-    function createAndRemoveGeometryWithShadows(castShadows, receiveShadows) {
+    function createAndRemoveGeometryWithShadows(shadows) {
         var objects = new EntityCollection();
         var visualizer = new GeometryVisualizer(EllipseGeometryUpdater, scene, objects);
 
@@ -288,8 +288,7 @@ defineSuite([
         ellipse.semiMajorAxis = new ConstantProperty(2);
         ellipse.semiMinorAxis = new ConstantProperty(1);
         ellipse.material = new ColorMaterialProperty();
-        ellipse.castShadows = new ConstantProperty(castShadows);
-        ellipse.receiveShadows = new ConstantProperty(receiveShadows);
+        ellipse.shadows = new ConstantProperty(shadows);
 
         var entity = new Entity();
         entity.position = new ConstantPositionProperty(new Cartesian3(1234, 5678, 9101112));
@@ -303,8 +302,8 @@ defineSuite([
             return isUpdated;
         }).then(function() {
             var primitive = scene.primitives.get(0);
-            expect(primitive.castShadows).toBe(castShadows);
-            expect(primitive.receiveShadows).toBe(receiveShadows);
+            expect(primitive.castShadows).toBe(shadows);
+            expect(primitive.receiveShadows).toBe(shadows);
 
             objects.remove(entity);
 

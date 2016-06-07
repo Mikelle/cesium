@@ -1059,8 +1059,7 @@ define([
         processPacketData(Boolean, box, 'outline', boxData.outline, interval, sourceUri, entityCollection);
         processPacketData(Color, box, 'outlineColor', boxData.outlineColor, interval, sourceUri, entityCollection);
         processPacketData(Number, box, 'outlineWidth', boxData.outlineWidth, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, box, 'castShadows', boxData.castShadows, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, box, 'receiveShadows', boxData.receiveShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, box, 'shadows', boxData.shadows, interval, sourceUri, entityCollection);
     }
 
     function processCylinder(entity, packet, entityCollection, sourceUri) {
@@ -1090,8 +1089,7 @@ define([
         processPacketData(Boolean, cylinder, 'outline', cylinderData.outline, interval, sourceUri, entityCollection);
         processPacketData(Color, cylinder, 'outlineColor', cylinderData.outlineColor, interval, sourceUri, entityCollection);
         processPacketData(Number, cylinder, 'outlineWidth', cylinderData.outlineWidth, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, cylinder, 'castShadows', cylinderData.castShadows, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, cylinder, 'receiveShadows', cylinderData.receiveShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, cylinder, 'shadows', cylinderData.shadows, interval, sourceUri, entityCollection);
     }
 
     function processDocument(packet, dataSource) {
@@ -1171,8 +1169,7 @@ define([
         processPacketData(Color, ellipse, 'outlineColor', ellipseData.outlineColor, interval, sourceUri, entityCollection);
         processPacketData(Number, ellipse, 'outlineWidth', ellipseData.outlineWidth, interval, sourceUri, entityCollection);
         processPacketData(Number, ellipse, 'numberOfVerticalLines', ellipseData.numberOfVerticalLines, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, ellipse, 'castShadows', ellipseData.castShadows, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, ellipse, 'receiveShadows', ellipseData.receiveShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, ellipse, 'shadows', ellipseData.shadows, interval, sourceUri, entityCollection);
     }
 
     function processEllipsoid(entity, packet, entityCollection, sourceUri) {
@@ -1200,8 +1197,7 @@ define([
         processPacketData(Boolean, ellipsoid, 'outline', ellipsoidData.outline, interval, sourceUri, entityCollection);
         processPacketData(Color, ellipsoid, 'outlineColor', ellipsoidData.outlineColor, interval, sourceUri, entityCollection);
         processPacketData(Number, ellipsoid, 'outlineWidth', ellipsoidData.outlineWidth, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, ellipsoid, 'castShadows', ellipsoidData.castShadows, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, ellipsoid, 'receiveShadows', ellipsoidData.receiveShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, ellipsoid, 'shadows', ellipsoidData.shadows, interval, sourceUri, entityCollection);
     }
 
     function processLabel(entity, packet, entityCollection, sourceUri) {
@@ -1258,8 +1254,7 @@ define([
         processPacketData(Number, model, 'scale', modelData.scale, interval, sourceUri, entityCollection);
         processPacketData(Number, model, 'minimumPixelSize', modelData.minimumPixelSize, interval, sourceUri, entityCollection);
         processPacketData(Boolean, model, 'incrementallyLoadTextures', modelData.incrementallyLoadTextures, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, model, 'castShadows', modelData.castShadows, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, model, 'receiveShadows', modelData.receiveShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, model, 'shadows', modelData.shadows, interval, sourceUri, entityCollection);
         processPacketData(Uri, model, 'uri', modelData.gltf, interval, sourceUri, entityCollection);
         processPacketData(Boolean, model, 'runAnimations', modelData.runAnimations, interval, sourceUri, entityCollection);
 
@@ -1404,8 +1399,7 @@ define([
         processPacketData(Boolean, polygon, 'perPositionHeight', polygonData.perPositionHeight, interval, sourceUri, entityCollection);
         processPacketData(Boolean, polygon, 'closeTop', polygonData.closeTop, interval, sourceUri, entityCollection);
         processPacketData(Boolean, polygon, 'closeBottom', polygonData.closeBottom, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, polygon, 'castShadows', polygonData.castShadows, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, polygon, 'receiveShadows', polygonData.receiveShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, polygon, 'shadows', polygonData.shadows, interval, sourceUri, entityCollection);
         processPositions(polygon, 'hierarchy', polygonData.positions, entityCollection);
     }
 
@@ -1441,8 +1435,7 @@ define([
         processPacketData(Number, rectangle, 'outlineWidth', rectangleData.outlineWidth, interval, sourceUri, entityCollection);
         processPacketData(Boolean, rectangle, 'closeBottom', rectangleData.closeBottom, interval, sourceUri, entityCollection);
         processPacketData(Boolean, rectangle, 'closeTop', rectangleData.closeTop, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, rectangle, 'castShadows', rectangleData.castShadows, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, rectangle, 'receiveShadows', rectangleData.receiveShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, rectangle, 'shadows', rectangleData.shadows, interval, sourceUri, entityCollection);
     }
 
     function processCorridor(entity, packet, entityCollection, sourceUri) {
@@ -1475,8 +1468,7 @@ define([
         processPacketData(Boolean, corridor, 'outline', corridorData.outline, interval, sourceUri, entityCollection);
         processPacketData(Color, corridor, 'outlineColor', corridorData.outlineColor, interval, sourceUri, entityCollection);
         processPacketData(Number, corridor, 'outlineWidth', corridorData.outlineWidth, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, corridor, 'castShadows', corridorData.castShadows, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, corridor, 'receiveShadows', corridorData.receiveShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, corridor, 'shadows', corridorData.shadows, interval, sourceUri, entityCollection);
     }
 
     function processWall(entity, packet, entityCollection, sourceUri) {
@@ -1506,8 +1498,7 @@ define([
         processPacketData(Boolean, wall, 'outline', wallData.outline, interval, sourceUri, entityCollection);
         processPacketData(Color, wall, 'outlineColor', wallData.outlineColor, interval, sourceUri, entityCollection);
         processPacketData(Number, wall, 'outlineWidth', wallData.outlineWidth, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, wall, 'castShadows', wallData.castShadows, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, wall, 'receiveShadows', wallData.receiveShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, wall, 'shadows', wallData.shadows, interval, sourceUri, entityCollection);
         processPositions(wall, 'positions', wallData.positions, entityCollection);
     }
 
@@ -1534,8 +1525,7 @@ define([
         processMaterialPacketData(polyline, 'material', polylineData.material, interval, sourceUri, entityCollection);
         processPacketData(Boolean, polyline, 'followSurface', polylineData.followSurface, interval, sourceUri, entityCollection);
         processPacketData(Number, polyline, 'granularity', polylineData.granularity, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, polyline, 'castShadows', polylineData.castShadows, interval, sourceUri, entityCollection);
-        processPacketData(Boolean, polyline, 'receiveShadows', polylineData.receiveShadows, interval, sourceUri, entityCollection);
+        processPacketData(Boolean, polyline, 'shadows', polylineData.shadows, interval, sourceUri, entityCollection);
         processPositions(polyline, 'positions', polylineData.positions, entityCollection);
     }
 

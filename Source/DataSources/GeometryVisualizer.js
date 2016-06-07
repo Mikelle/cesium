@@ -81,29 +81,30 @@ define([
             return;
         }
 
-        var shadowState;
-        if (updater.outlineEnabled || updater.fillEnabled) {
-            var castShadows = updater.castShadowsProperty.getValue(time);
-            var receiveShadows = updater.receiveShadowsProperty.getValue(time);
-            shadowState = castShadows ? (receiveShadows ? 0 : 1) : (receiveShadows ? 2 : 3);
-        }
+        var shadows = updater.shadowsProperty.getValue(time);
+        var batch;
 
         if (updater.outlineEnabled) {
-            that._outlineBatches[shadowState].add(time, updater);
+            batch = shadows ? that._shadowsOutlineBatch : that._outlineBatch;
+            batch.add(time, updater);
         }
 
         if (updater.fillEnabled) {
             if (updater.isClosed) {
                 if (updater.fillMaterialProperty instanceof ColorMaterialProperty) {
-                    that._closedColorBatches[shadowState].add(time, updater);
+                    batch = shadows ? that._shadowsClosedColorBatch : that._closedColorBatch;
+                    batch.add(time, updater);
                 } else {
-                    that._closedMaterialBatches[shadowState].add(time, updater);
+                    batch = shadows ? that._shadowsClosedMaterialBatch : that._closedMaterialBatch;
+                    batch.add(time, updater);
                 }
             } else {
                 if (updater.fillMaterialProperty instanceof ColorMaterialProperty) {
-                    that._openColorBatches[shadowState].add(time, updater);
+                    batch = shadows ? that._shadowsOpenColorBatch : that._openColorBatch;
+                    batch.add(time, updater);
                 } else {
-                    that._openMaterialBatches[shadowState].add(time, updater);
+                    batch = shadows ? that._shadowsOpenMaterialBatch : that._shadowsOpenMaterialBatch;
+                    batch.add(time, updater);
                 }
             }
         }
@@ -141,28 +142,20 @@ define([
         this._removedObjects = new AssociativeArray();
         this._changedObjects = new AssociativeArray();
 
-        var numberOfShadowStates = 4;
-        var castShadowsStates = [true, true, false, false];
-        var receiveShadowsStates = [true, false, true, false];
-
-        this._outlineBatches = new Array(numberOfShadowStates);
-        this._closedColorBatches = new Array(numberOfShadowStates);
-        this._closedMaterialBatches = new Array(numberOfShadowStates);
-        this._openColorBatches = new Array(numberOfShadowStates);
-        this._openMaterialBatches = new Array(numberOfShadowStates);
-
-        for (var i = 0; i < numberOfShadowStates; ++i) {
-            var castShadows = castShadowsStates[i];
-            var receiveShadows = receiveShadowsStates[i];
-            this._outlineBatches[i] = new StaticOutlineGeometryBatch(primitives, scene, castShadows, receiveShadows);
-            this._closedColorBatches[i] = new StaticGeometryColorBatch(primitives, type.perInstanceColorAppearanceType, true, castShadows, receiveShadows);
-            this._closedMaterialBatches[i] = new StaticGeometryPerMaterialBatch(primitives, type.materialAppearanceType, true, castShadows, receiveShadows);
-            this._openColorBatches[i] = new StaticGeometryColorBatch(primitives, type.perInstanceColorAppearanceType, false, castShadows, receiveShadows);
-            this._openMaterialBatches[i] = new StaticGeometryPerMaterialBatch(primitives, type.materialAppearanceType, false, castShadows, receiveShadows);
-        }
+        this._outlineBatch = new StaticOutlineGeometryBatch(primitives, scene, false);
+        this._closedColorBatch = new StaticGeometryColorBatch(primitives, type.perInstanceColorAppearanceType, true, false);
+        this._closedMaterialBatch = new StaticGeometryPerMaterialBatch(primitives, type.materialAppearanceType, true, false);
+        this._openColorBatch = new StaticGeometryColorBatch(primitives, type.perInstanceColorAppearanceType, false, false);
+        this._openMaterialBatch = new StaticGeometryPerMaterialBatch(primitives, type.materialAppearanceType, false, false);
+        this._shadowsOutlineBatch = new StaticOutlineGeometryBatch(primitives, scene, true);
+        this._shadowsClosedColorBatch = new StaticGeometryColorBatch(primitives, type.perInstanceColorAppearanceType, true, true);
+        this._shadowsClosedMaterialBatch = new StaticGeometryPerMaterialBatch(primitives, type.materialAppearanceType, true, true);
+        this._shadowsOpenColorBatch = new StaticGeometryColorBatch(primitives, type.perInstanceColorAppearanceType, false, true);
+        this._shadowsOpenMaterialBatch = new StaticGeometryPerMaterialBatch(primitives, type.materialAppearanceType, false, true);
 
         this._dynamicBatch = new DynamicGeometryBatch(primitives);
-        this._batches = [].concat(this._outlineBatches, this._closedColorBatches, this._closedMaterialBatches, this._openColorBatches, this._openMaterialBatches, this._dynamicBatch);
+        this._batches = [this._dynamicBatch, this._outlineBatch, this._closedColorBatch, this._closedMaterialBatch, this._openColorBatch, this._openMaterialBatch,
+                         this._shadowsOutlineBatch, this._shadowsClosedColorBatch, this._shadowsClosedMaterialBatch, this._shadowsOpenColorBatch, this._shadowsOpenMaterialBatch];
 
         this._subscriptions = new AssociativeArray();
         this._updaters = new AssociativeArray();

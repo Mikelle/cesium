@@ -34,8 +34,7 @@ define([
      * @param {Property} [options.subdivisions=128] A Property specifying the number of samples per outline ring, determining the granularity of the curvature.
      * @param {Property} [options.stackPartitions=64] A Property specifying the number of stacks.
      * @param {Property} [options.slicePartitions=64] A Property specifying the number of radial slices.
-     * @param {Property} [options.castShadows=false] A boolean Property specifying whether the ellipsoid casts shadows from each light source.
-     * @param {Property} [options.receiveShadows=false] A boolean Property specifying whether the ellipsoid receives shadows from shadow casters in the scene.
+     * @param {Property} [options.shadows=false] A boolean Property specifying whether the ellipsoid casts and receives shadows from each light source.
      *
      * @demo {@link http://cesiumjs.org/Cesium/Apps/Sandcastle/index.html?src=Spheres%20and%20Ellipsoids.html|Cesium Sandcastle Spheres and Ellipsoids Demo}
      */
@@ -60,10 +59,7 @@ define([
         this._outlineColorSubscription = undefined;
         this._outlineWidth = undefined;
         this._outlineWidthSubscription = undefined;
-        this._castShadows = undefined;
-        this._castShadowsSubscription = undefined;
-        this._receiveShadows = undefined;
-        this._receiveShadowsSubscription = undefined;
+        this._shadows = undefined;
         this._definitionChanged = new Event();
 
         this.merge(defaultValue(options, defaultValue.EMPTY_OBJECT));
@@ -164,21 +160,12 @@ define([
 
         /**
          * Get or sets the boolean Property specifying whether the ellipsoid
-         * casts shadows from each light source.
+         * casts and receives shadows from each light source.
          * @memberof EllipsoidGraphics.prototype
          * @type {Property}
          * @default false
          */
-        castShadows : createPropertyDescriptor('castShadows'),
-
-        /**
-         * Get or sets the boolean Property specifying whether the ellipsoid
-         * receives shadows from shadow casters in the scene.
-         * @memberof EllipsoidGraphics.prototype
-         * @type {Property}
-         * @default false
-         */
-        receiveShadows : createPropertyDescriptor('receiveShadows')
+        shadows : createPropertyDescriptor('shadows')
     });
 
     /**
@@ -201,8 +188,7 @@ define([
         result.stackPartitions = this.stackPartitions;
         result.slicePartitions = this.slicePartitions;
         result.subdivisions = this.subdivisions;
-        result.castShadows = this.castShadows;
-        result.receiveShadows = this.receiveShadows;
+        result.shadows = this.shadows;
 
         return result;
     };
@@ -230,8 +216,7 @@ define([
         this.stackPartitions = defaultValue(this.stackPartitions, source.stackPartitions);
         this.slicePartitions = defaultValue(this.slicePartitions, source.slicePartitions);
         this.subdivisions = defaultValue(this.subdivisions, source.subdivisions);
-        this.castShadows = defaultValue(this.castShadows, source.castShadows);
-        this.receiveShadows = defaultValue(this.receiveShadows, source.receiveShadows);
+        this.shadows = defaultValue(this.shadows, source.shadows);
     };
 
     return EllipsoidGraphics;
